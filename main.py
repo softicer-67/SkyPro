@@ -100,9 +100,7 @@ def main():
                             add += ''
                         else:
                             add += i
-                    letters_two = add + add_letter
-
-                    print(letters_two)
+                    letters_two = add + add_letter                    
                 else:
                     score_user_1 += 1
                     add = ''
@@ -112,8 +110,6 @@ def main():
                         else:
                             add += i
                     letters_one = add + add_letter
-                    print(letters_one)
-
             else:
 
                 add_letter = random_letter(1)
