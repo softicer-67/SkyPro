@@ -15,10 +15,10 @@ all_letters = ''
 for k, v in letters.items():
     all_letters += k * v
 
-    
+
 # Считываю все буквы из файла, добавляю из по запросу к функции в игру и удаляю эти буквы из файла.
 # Делаю проверку, если букв осталось меньше чем нужно дабавить в игре - Выход
-def get_letters(num):    
+def get_letters(num):
     global all_letters
     rnd = ''
     if len(all_letters) < num:
@@ -31,7 +31,7 @@ def get_letters(num):
 
 
 # Логика игры
-def main():    
+def main():
     if os.path.exists('tmp/'):
         pass
     else:
@@ -92,12 +92,11 @@ def main():
             print("В слове есть цифры. Попробуйте еще.")
             continue
 
-        for i in word.upper():
-            if i not in let:
-                print("Делайте выбор только из ваших букв")
-                break
+        elif [i for i in word.upper() if i not in let]:
+            print("Делайте выбор только из ваших букв")
+            continue
+        elif [i for i in word.upper() if i in let]:
 
-        else:
             with open('russian_word.txt', 'r', encoding='utf-8') as fl:
                 file = fl.read()
 
