@@ -93,7 +93,7 @@ def main():
                 add_letter = random_letter(len_word + 1)
                 print(f'Такое слово есть.\n{user} получает {bonus} баллов\nДобавляю буквы: {add_letter}')
 
-                                if game % 2 == 0:
+                if game % 2 == 0:
                     score_user_2 += 1
                     
                     add = ''
