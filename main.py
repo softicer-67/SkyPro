@@ -15,10 +15,9 @@ all_letters = ''
 for k, v in letters.items():
     all_letters += k * v
 
-
-def get_letters(num):
-    # Считываю все буквы из файла, добавляю из по запросу к функции в игру и удаляю эти буквы из файла.
-    # Делаю проверку, если букв осталось меньше чем нужно дабавить в игре - Выход
+# Считываю все буквы из файла, добавляю из по запросу к функции в игру и удаляю эти буквы из файла.
+# Делаю проверку, если букв осталось меньше чем нужно дабавить в игре - Выход
+def get_letters(num):    
     global all_letters
     rnd = ''
     if len(all_letters) < num:
@@ -30,8 +29,8 @@ def get_letters(num):
     return rnd
 
 
-def main():
-    # Логика игры
+# Логика игры
+def main():    
     if os.path.exists('tmp/'):
         pass
     else:
