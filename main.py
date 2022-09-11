@@ -1,7 +1,6 @@
 import random
 from letters import letter
 
-
 WHITE = '\033[00m'
 GREEN = '\033[0;92m'
 RED = '\033[1;31m'
@@ -30,7 +29,6 @@ def random_letter(num):
 
 # Логика игры
 def main():
-
     print('Привет.\nМы начинаем играть в Scrabble')
     first_player = input('Как зовут первого игрока? ')
     print(first_player)
@@ -74,50 +72,57 @@ def main():
             print("В слове есть цифры. Попробуйте еще.")
             continue
 
-        elif [i for i in word.upper() if i not in let]:
+        tmp_len = sorted(list(let.lower()))
+        tmp_word = sorted(list(word))
+
+        tmp = ''
+        for i in range(len(tmp_word)):
+            if word[i] in tmp_len:
+                tmp += word[i]
+        if len(tmp) != len(word):
             print("Делайте выбор только из ваших букв")
             continue
-            
-        elif [i for i in word.upper() if i in let]:
+        else:
+
             with open('russian_word.txt', 'r', encoding='utf-8') as f:
                 file = f.read()
 
-            bonus = 0
-            if word in file and len(word) >= 3:
-                len_word = len(word)
-                if len_word == 3:
-                    bonus = 3
-                elif len_word > 3:
-                    bonus = len_word + 2
+                bonus = 0
+                if word in file and len(word) >= 3:
+                    len_word = len(word)
+                    if len_word == 3:
+                        bonus = 3
+                    elif len_word > 3:
+                        bonus = len_word + 2
 
-                add_letter = random_letter(len_word + 1)
-                print(f'Такое слово есть.\n{user} получает {bonus} баллов\nДобавляю буквы: {add_letter}')
+                    add_letter = random_letter(len_word + 1)
+                    print(f'Такое слово есть.\n{user} получает {bonus} баллов\nДобавляю буквы: {add_letter}')
 
-                if game % 2 == 0:
-                    score_user_2 += 1
-                    
-                    add = ''
-                    for i in letters_two.lower():
-                        if i in word:
-                            del i
-                        else:
-                            add += i
-                    letters_two = add + add_letter
+                    if game % 2 == 0:
+                        score_user_2 += 1
 
+                        add = ''
+                        for i in letters_two.lower():
+                            if i in word:
+                                del i
+                            else:
+                                add += i
+                        letters_two = add + add_letter
+
+                    else:
+                        score_user_1 += 1
+
+                        add = ''
+                        for i in letters_one.lower():
+                            if i in word:
+                                del i
+                            else:
+                                add += i
+                        letters_one = add + add_letter
                 else:
-                    score_user_1 += 1
 
-                    add = ''
-                    for i in letters_one.lower():
-                        if i in word:
-                            del i
-                        else:
-                            add += i
-                    letters_one = add + add_letter
-            else:
-
-                add_letter = random_letter(1)
-                print(f'Такого слова нет.\n{user} не получает очков.\nДобавляю 1 букву: {add_letter}')
+                    add_letter = random_letter(1)
+                    print(f'Такого слова нет.\n{user} не получает очков.\nДобавляю 1 букву: {add_letter}')
 
         print(f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
         game += 1
