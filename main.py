@@ -92,21 +92,24 @@ def main():
                 add_letter = random_letter(len_word + 1)
                 print(f'Такое слово есть.\n{user} получает {bonus} баллов\nДобавляю буквы: {add_letter}')
 
-                if game % 2 == 0:
+                                if game % 2 == 0:
                     score_user_2 += 1
+                    
                     add = ''
-                    for i in let:
-                        if i in word or i in add:
-                            add += ''
+                    for i in letters_two.lower():
+                        if i in word:
+                            del i
                         else:
                             add += i
-                    letters_two = add + add_letter                    
+                    letters_two = add + add_letter
+
                 else:
                     score_user_1 += 1
+
                     add = ''
-                    for i in let:
-                        if i in word or i in add:
-                            add += ''
+                    for i in letters_one.lower():
+                        if i in word:
+                            del i
                         else:
                             add += i
                     letters_one = add + add_letter
