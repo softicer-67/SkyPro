@@ -77,9 +77,9 @@ def main():
 
         tmp = ''
         for i in range(len(tmp_word)):
-            if word[i] in tmp_len:
-                tmp += word[i]
-        if len(tmp) != len(word):
+            if tmp_word[i] in tmp_len:
+                tmp += tmp_word[i]
+        if len(tmp) != len(tmp_word):
             print("Делайте выбор только из ваших букв")
             continue
         else:
