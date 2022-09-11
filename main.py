@@ -77,6 +77,7 @@ def main():
         elif [i for i in word.upper() if i not in let]:
             print("Делайте выбор только из ваших букв")
             continue
+            
         elif [i for i in word.upper() if i in let]:
             with open('russian_word.txt', 'r', encoding='utf-8') as f:
                 file = f.read()
