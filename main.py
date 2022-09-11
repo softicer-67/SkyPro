@@ -3,11 +3,11 @@ import shutil
 from letters import letter
 import os
 
+
 WHITE = '\033[00m'
 GREEN = '\033[0;92m'
 RED = '\033[1;31m'
 BLUE = '\033[1;36m'
-
 
 letters = letter
 
@@ -58,6 +58,8 @@ def main():
         f.write(letters_two)
 
     game = 1
+    score_user_1 = 0
+    score_user_2 = 0
 
     while True:
 
@@ -72,13 +74,13 @@ def main():
 
         with open(f'tmp/game_{user}.txt', 'r', encoding='utf-8') as f:
             text = f.read()
-
-        print(f'Составь слово из букв: {BLUE}{" ".join(text.upper())}{WHITE}')
+            print(f'Составь слово из букв: {BLUE}{" ".join(text.upper())}{WHITE}')
 
         word = input().lower()
 
         if word == 'stop':
             print(f'{GREEN}Игрок {RED}{user}{GREEN} решил остановить игру.\n\t\t{RED}До свидания!{WHITE}')
+            print(f'\t{RED} Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
             file_path = 'tmp'
             shutil.rmtree(file_path)
             break
@@ -90,16 +92,18 @@ def main():
             print("В слове есть цифры. Попробуйте еще.")
             continue
 
+        for i in word.upper():
+            if i not in let:
+                print("Делайте выбор только из ваших букв")
+                break
+
         else:
             with open('russian_word.txt', 'r', encoding='utf-8') as fl:
                 file = fl.read()
 
-            for i in list(word.upper()):
-                if i not in let:
-                    print("Вы набираете не существующий символ")
-                    break
             bonus = 0
-            if word in file:
+
+            if word in file and len(word) >= 3:
                 len_word = len(word)
                 if len_word == 3:
                     bonus = 3
@@ -109,16 +113,20 @@ def main():
                 add_letter = get_letters(len_word + 1)
                 print(f'Такое слово есть.\n{user} получает {bonus} баллов\nДобавляю буквы: {add_letter}')
 
+                if game % 2 == 0:
+                    score_user_2 += 1
+                else:
+                    score_user_1 += 1
+
                 with open(f'tmp/game_{user}.txt', 'r', encoding='utf-8') as fl:
                     fe = fl.read()
-                    # print(fe)
 
-                    add = ''
-                    for i in fe.lower():
-                        if i in word or i in add:
-                            add += ''
-                        else:
-                            add += i
+                add = ''
+                for i in fe.lower():
+                    if i in word or i in add:
+                        add += ''
+                    else:
+                        add += i
 
                     with open(f'tmp/game_{user}.txt', 'w', encoding='utf-8') as fil:
                         fil.write(add)
@@ -130,8 +138,7 @@ def main():
                 add_letter = get_letters(1)
                 print(f'Такого слова нет.\n{user} не получает очков.\nДобавляю 1 букву: {add_letter}')
 
-                with open(f'tmp/game_{user}.txt', 'a', encoding='utf-8') as fil:
-                    fil.write(add_letter)
+        print(f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
         game += 1
 
 
