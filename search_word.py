@@ -19,13 +19,22 @@ def timeit(func):
 def check_word_my(word, word_list):
     for i in word_list:
         if i == word:
-            return 'Found!', word
+            return 'Found!', i
     return 'NotFound'
 
 
 print(check_word_my('ясень', file))
 print(check_word_my('кот', file))
 
+'''
+=========================
+0.0576167106628418
+('Found!', 'ясень')
+=========================
+0.01562356948852539
+('Found!', 'кот')
+=========================
+'''
 
 @timeit
 def check_word(word, word_list):
@@ -43,4 +52,13 @@ def check_word(word, word_list):
 print(check_word('ясень', file))
 print(check_word('кот', file))
 
+'''
+=========================
+0.10252952575683594
+('Found!', 'ясень')
+=========================
+0.04003643989562988
+('Found!', 'кот')
+=========================
+'''
 
