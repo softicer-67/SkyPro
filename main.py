@@ -22,7 +22,7 @@ def random_letter(num):
     global all_letters
     rnd = ''
     if len(all_letters) < num:
-        exit(f'Закончились буквы. Game Over.\nРезультат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
+        exit(f'Закончились буквы. Game Over.\n{print_result()}')
     for i in range(num):
         x = random.choice(range(len(all_letters)))
         rnd += all_letters[x]
@@ -63,7 +63,7 @@ def main():
 
         if word == 'stop':
             print(f'{GREEN}Игрок {RED}{user}{GREEN} решил остановить игру.\n\t\t{RED}До свидания!{WHITE}')
-            print(f'\t{RED} Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
+            print(print_result())
             break
 
         elif word == '':
@@ -126,8 +126,12 @@ def main():
                     add_letter = random_letter(1)
                     print(f'Такого слова нет.\n{user} не получает очков.\nДобавляю 1 букву: {add_letter}')
 
-            print(f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
+            print(print_result())
         game += 1
+
+
+def print_result():
+    return f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}'
 
 
 if __name__ == '__main__':
