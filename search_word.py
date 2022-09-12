@@ -6,10 +6,10 @@ with open('russian_word.txt', 'r', encoding='utf-8') as f:
 
 
 def timeit(func):
-    def wrapper(word, word_list):
+    def wrapper(a, b):
         start = time()
         print('=' * 50)
-        result = func(word, word_list)
+        result = func(a, b)
         print(time() - start)
         return result
     return wrapper
