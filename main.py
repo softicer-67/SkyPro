@@ -12,6 +12,9 @@ all_letters = ''
 for k, v in letters.items():
     all_letters += k * v
 
+score_user_1 = 0
+score_user_2 = 0
+
 
 # Считываю все буквы из файла, добавляю из по запросу к функции в игру и удаляю эти буквы из файла.
 # Делаю проверку, если букв осталось меньше чем нужно дабавить в игре - Выход
@@ -19,7 +22,7 @@ def random_letter(num):
     global all_letters
     rnd = ''
     if len(all_letters) < num:
-        exit('Закончились буквы. Game Over.')
+        exit(f'Закончились буквы. Game Over.\nРезультат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
     for i in range(num):
         x = random.choice(range(len(all_letters)))
         rnd += all_letters[x]
@@ -29,6 +32,7 @@ def random_letter(num):
 
 # Логика игры
 def main():
+    global score_user_1, score_user_2
     print('Привет.\nМы начинаем играть в Scrabble')
     first_player = input('Как зовут первого игрока? ')
     print(first_player)
@@ -44,8 +48,6 @@ def main():
     print(f'{GREEN}{second_player.upper()}{WHITE} - буквы: {letters_two}')
 
     game = 1
-    score_user_1 = 0
-    score_user_2 = 0
 
     while True:
         if game % 2 != 0:
@@ -124,7 +126,7 @@ def main():
                     add_letter = random_letter(1)
                     print(f'Такого слова нет.\n{user} не получает очков.\nДобавляю 1 букву: {add_letter}')
 
-        print(f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
+            print(f'{RED}Результат: {GREEN}{score_user_1}{RED} vs {GREEN}{score_user_2}{WHITE}')
         game += 1
 
 
